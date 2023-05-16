@@ -7,6 +7,10 @@ public class BouncingBall : MonoBehaviour
     public GameObject ball;
     public Vector3 velocity = new Vector3(1, 2, 0);
     LinearFunction f = new LinearFunction(1,2);
+    public DraggablePoint A;
+    public DraggablePoint B;
+    public DrawLine lineL;
+    public Arrow arrowBall;
 
     private void Start()
     {
@@ -15,6 +19,7 @@ public class BouncingBall : MonoBehaviour
 
     void Update()
     {
+        arrowBall.myVector = velocity;
         ball.transform.position += velocity * Time.deltaTime;
         if(ball.transform.position.y > 4 - 0.5f)
         {
@@ -32,6 +37,10 @@ public class BouncingBall : MonoBehaviour
         {
             velocity.x = -velocity.x;
         }
+
+        f.setLinearFunctionWithTwoPoints(A.transform.position, B.transform.position);
+        lineL.startPosition = new Vector3(-10, f.getY(-10), 0);
+        lineL.endPosition = new Vector3(10, f.getY(10), 0);
 
         
     }

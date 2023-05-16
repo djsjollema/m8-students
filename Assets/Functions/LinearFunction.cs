@@ -17,4 +17,10 @@ public class LinearFunction
         return x*slope + intercept; 
     }
 
+    public void setLinearFunctionWithTwoPoints(Vector3 A, Vector3 B)
+    {
+        this.slope = (B.y - A.y)/(B.x - A.x);
+        this.intercept = A.y - this.slope * A.x;
+    }
+
 }
