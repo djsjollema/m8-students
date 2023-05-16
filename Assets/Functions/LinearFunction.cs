@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LinearFunction 
 {
-    float slope;
-    float intercept;
+    public float slope;
+    public float intercept;
 
     public LinearFunction(float slope, float intercept)
     {
@@ -21,6 +21,19 @@ public class LinearFunction
     {
         this.slope = (B.y - A.y)/(B.x - A.x);
         this.intercept = A.y - this.slope * A.x;
+    }
+
+    public void setLinearFunctionWithSlopeAndPoint(float slope, Vector3 A)
+    {
+        this.slope = slope;
+        this.intercept = A.y - slope * A.x;
+    }
+
+    public Vector3 intersection(LinearFunction m)
+    {
+        float x = (m.intercept - this.intercept)/(this.slope - m.slope);
+        float y = this.slope * x + this.intercept;
+        return new Vector3 (x, y,0);
     }
 
 }
