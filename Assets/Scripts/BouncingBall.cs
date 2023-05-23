@@ -16,6 +16,12 @@ public class BouncingBall : MonoBehaviour
     public Arrow arrowBall;
     public GameObject S;
 
+    public Vector3 normal = new Vector3(0,1,0);
+    public Arrow arrowNormal;
+
+    Vector3 tangent;
+    public Arrow tangentArrow;
+
     private void Start()
     {
         //Debug.Log(f.getY(2));
@@ -51,5 +57,19 @@ public class BouncingBall : MonoBehaviour
         lineM.endPosition = new Vector3(10,g.getY(10), 0);
 
         S.transform.position = f.intersection(g);
+
+        normal = f.normal();
+        normal = Vector3.Dot(normal, velocity) * normal;
+        arrowNormal.myVector = normal;
+        arrowNormal.transform.position = S.transform.position;
+
+        tangent = velocity - normal;
+        tangentArrow.myVector = tangent;
+        tangentArrow.transform.position = S.transform.position;
+        if(Vector3.Distance(ball.transform.position,S.transform.position) < ball.transform.localScale.x / 2)
+        {
+            normal = -normal;
+            velocity = normal + tangent;
+        } 
     }
 }

@@ -36,4 +36,9 @@ public class LinearFunction
         return new Vector3 (x, y,0);
     }
 
+    public Vector3 normal()
+    {
+        return new Vector3(1, -1 / slope, 0).normalized;
+    }
+
 }
